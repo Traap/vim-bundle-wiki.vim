@@ -30,12 +30,6 @@ let g:vimwiki_list =
   \ 'auto_generate_tags': 1,
   \}]
 
-command! Diary VimwikiDiaryIndex
-augroup diary_group
-  autocmd!
-  autocmd BufRead,BufNewFile journal.wiki VimwikiDiaryGenerateLinks
-augroup end
-
 " -------------------------------------------------------------------------- }}}
 " {{{ Generic calendar setup.
 
