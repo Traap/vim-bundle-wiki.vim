@@ -44,10 +44,6 @@ let g:calendar_navi = 'both'
 let g:calendar_diary = $HOME.'/git/wiki/journal'
 let g:calendar_filetype = 'wiki'
 let g:calendar_diary_extension = '.wiki'
-let g:calendar_action = 'MyCalAction'
-let g:calendar_sign = 'MyCalSign'
-
-map <LocalLeader>cv :call ToggleCalendar()<cr>
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Toggle calendar on the terminal right side.  
