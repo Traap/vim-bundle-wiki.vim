@@ -66,5 +66,56 @@ function! ToggleCalendar()
   end
 endfunction
 
+" Add zero prefix to a number
+function! s:prefix_zero(num) abort
+  if a:num < 10
+    return '0'.a:num
+  endif
+  return a:num
+endfunction
+
+" Build journal file name.
+function! s:build_filename(day,month,year) abort
+  " day   : day you actioned
+  " month : month you actioned
+  " year  : year you actioned
+  let day = s:prefix_zero(a:day)
+  let month = s:prefix_zero(a:month)
+  let sfile = a:year.'-'.month.'-'.day
+  return sfile
+endfunction
+
+function MyCalAction(day,month,year,week,dir)
+  " day   : day you actioned
+  " month : month you actioned
+  " year  : year you actioned
+  " week  : day of week (Mo=1 ... Su=7)
+  " dir   : direction of calendar
+  let sfile = s:build_filename(a:day, a:month, a:year)
+
+  if winnr('#') == 0
+    if a:dir ==? 'V'
+      vsplit
+    else
+      split
+    endif
+  else
+    wincmd p
+    if !&hidden && &modified
+      new
+    endif
+  endif
+
+  call wiki#journal#make_note(sfile)
+endfunction
+
+function MyCalSign(day,month,year)
+  " day   : day you actioned
+  " month : month you actioned
+  " year  : year you actioned
+  let sfile = s:build_filename(a:day, a:month, a:year)
+  return filereadable(expand(sfile))
+endfunction
+
 " -------------------------------------------------------------------------- }}}
 endif
