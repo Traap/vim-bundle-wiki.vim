@@ -62,6 +62,11 @@ let g:calendar_filetype = 'wiki'
 let g:calendar_diary_extension = '.wiki'
 
 " -------------------------------------------------------------------------- }}}
+" {{{ wiki.vim 
+
+let g:wiki_root  = $HOME.'/git/wiki'
+
+" -------------------------------------------------------------------------- }}}
 " {{{ Toggle calendar on the terminal right side.  
 
 function! ToggleCalendar()
