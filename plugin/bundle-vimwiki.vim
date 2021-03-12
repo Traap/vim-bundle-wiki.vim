@@ -11,6 +11,14 @@ let g:calendar_diary_extension = '.wiki'
 
 let g:wiki_root  = $HOME.'/git/wiki'
 
+let g:wiki_export = {
+    \ 'args' : '',
+    \ 'from_format' : 'markdown',
+    \ 'ext' : 'pdf',
+    \ 'view' : v:true,
+    \ 'output': 'printed',
+    \}
+
 " -------------------------------------------------------------------------- }}}
 " {{{ Toggle calendar on the terminal right side.  
 
