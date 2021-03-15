@@ -11,6 +11,11 @@ let g:calendar_diary_extension = '.wiki'
 
 let g:wiki_root  = $HOME.'/git/wiki'
 
+let g:wiki_viewer = { 'pdf': 'zathura' }
+
+let g:traap_pdf_viewer = 'zathura'
+let g:traap_png_viewer = 'feh'
+
 let g:wiki_export = {
     \ 'args' : '',
     \ 'from_format' : 'markdown',
@@ -18,6 +23,21 @@ let g:wiki_export = {
     \ 'view' : v:true,
     \ 'output': 'printed',
     \}
+
+
+function! WikiFileOpen(...) abort dict
+  if self.path =~# 'pdf$'
+    silent execute '!' g:traap_pdf_viewer fnameescape(self.path) '&'
+    return 1
+  endif
+
+  if self.path =~# '\v(png|jpg)$'
+    silent execute '!' g:traap_png_viewer fnameescape(self.path) '&'
+    return 1
+  endif
+
+  return 0
+endfunction
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Toggle calendar on the terminal right side.  
