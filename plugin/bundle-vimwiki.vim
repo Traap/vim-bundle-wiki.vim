@@ -11,9 +11,9 @@ let g:calendar_diary_extension = '.wiki'
 
 let g:wiki_root  = $HOME.'/git/wiki'
 
-let g:wiki_viewer = { 'pdf': 'zathura' }
+let g:wiki_viewer = { 'pdf': 'okular' }
 
-let g:traap_pdf_viewer = 'zathura'
+let g:traap_pdf_viewer = 'okular'
 let g:traap_png_viewer = 'feh'
 
 let g:wiki_export = {
