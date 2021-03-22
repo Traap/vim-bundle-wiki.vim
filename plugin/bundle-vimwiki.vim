@@ -11,10 +11,16 @@ let g:calendar_diary_extension = '.wiki'
 
 let g:wiki_root  = $HOME.'/git/wiki'
 
-let g:wiki_viewer = { 'pdf': 'okular' }
-
-let g:traap_pdf_viewer = 'okular'
-let g:traap_png_viewer = 'feh'
+" Windoz Subsystem for Linux (WSL2) check.
+if g:os_wsl
+  let g:wiki_viewer = { 'pdf': 'SumatraPDF.exe' }
+  let g:traap_pdf_viewer = 'SumatraPDF.exe'
+  let g:traap_png_viewer = 'feh'
+else
+  let g:wiki_viewer = { 'pdf': 'okular' }
+  let g:traap_pdf_viewer = 'okular'
+  let g:traap_png_viewer = 'feh'
+endif
 
 let g:wiki_export = {
     \ 'args' : '',
@@ -23,7 +29,6 @@ let g:wiki_export = {
     \ 'view' : v:true,
     \ 'output': 'printed',
     \}
-
 
 function! WikiFileOpen(...) abort dict
   if self.path =~# 'pdf$'
