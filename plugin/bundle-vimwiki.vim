@@ -2,7 +2,7 @@
 
 let g:calendar_mark = 'right'
 let g:calendar_navi = 'both'
-let g:calendar_diary = $HOME.'/git/wiki/diary'
+let g:calendar_diary = $HOME.'/git/wiki/journal'
 let g:calendar_filetype = 'wiki'
 let g:calendar_diary_extension = '.wiki'
 
