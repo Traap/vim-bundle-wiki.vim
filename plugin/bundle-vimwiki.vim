@@ -7,28 +7,45 @@ let g:calendar_filetype = 'wiki'
 let g:calendar_diary_extension = '.wiki'
 
 " -------------------------------------------------------------------------- }}}
-" {{{ wiki.vim 
+" {{{ General settings.
 
+let g:wiki_file_handler = 'WikiFileOpen'
+let g:wiki_filetypes = ['wiki', 'md']
 let g:wiki_root  = $HOME.'/git/wiki'
+let g:wiki_toc_depth = 2
+let g:wiki_viewer = {'pdf': 'okular'}
+let g:wiki_write_on_nav = 1
 
-" Windoz Subsystem for Linux (WSL2) check.
-if g:os_wsl
-  let g:wiki_viewer = { 'pdf': 'SumatraPDF.exe' }
-  let g:traap_pdf_viewer = 'SumatraPDF.exe'
-  let g:traap_png_viewer = 'feh'
-else
-  let g:wiki_viewer = { 'pdf': 'okular' }
-  let g:traap_pdf_viewer = 'okular'
-  let g:traap_png_viewer = 'feh'
-endif
+" -------------------------------------------------------------------------- }}}
+" {{{ Export current wiki page. 
 
 let g:wiki_export = {
     \ 'args' : '',
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
-    \ 'view' : v:true,
+    \ 'link_ext_replace': v:false,
+    \ 'view' : v:false,
     \ 'output': 'printed',
     \}
+
+" -------------------------------------------------------------------------- }}}
+" {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
+
+if g:os_wsl
+  let g:traap_pdf_viewer = 'SumatraPDF.exe'
+  let g:traap_png_viewer = 'feh'
+else
+  let g:traap_pdf_viewer = 'okular'
+  let g:traap_png_viewer = 'feh'
+endif
+
+let g:wiki_viewer = {
+    \ 'pdf': g:traap_pdf_viewer,
+    \   '_': 'xdg_open',
+    \}
+
+" -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim File Handler
 
 function! WikiFileOpen(...) abort dict
   if self.path =~# 'pdf$'
@@ -45,7 +62,7 @@ function! WikiFileOpen(...) abort dict
 endfunction
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Toggle calendar on the terminal right side.  
+" {{{ Toggle calendar on the terminal right side.
 
 function! ToggleCalendar()
   execute ":CalendarVR"
