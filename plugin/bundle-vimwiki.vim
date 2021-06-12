@@ -1,3 +1,11 @@
+" {{{ bundle-vimwiki.vim
+
+if exists('g:loaded_bundle_vimwiki')
+  finish
+endif
+let g:loaded_bundle_vimwiki=1
+
+" -------------------------------------------------------------------------- }}}
 " {{{ Archlinux and Windows Subsystem for Linux check 
 
 let g:os_arch = trim(system("cat /etc/issue | rg 'Arch Linux' -c"))
@@ -47,7 +55,7 @@ let g:wiki_export = {
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
     \ 'link_ext_replace': v:false,
-    \ 'view' : v:false,
+    \ 'view' : v:true,
     \ 'output': 'printed',
     \}
 
