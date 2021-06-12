@@ -1,3 +1,26 @@
+" {{{ Archlinux and Windows Subsystem for Linux check 
+
+let g:os_arch = trim(system("cat /etc/issue | rg 'Arch Linux' -c"))
+let g:os_wsl  = (substitute(system('uname -r'), '\n', '', '') =~ 'Microsoft') ||
+              \ (substitute(system('uname -r'), '\n', '', '') =~ 'WSL2') 
+             
+" -------------------------------------------------------------------------- }}}
+" {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
+
+if g:os_wsl
+  let g:traap_pdf_viewer = 'SumatraPDF.exe'
+  let g:traap_png_viewer = 'feh'
+else
+  let g:traap_pdf_viewer = 'okular'
+  let g:traap_png_viewer = 'feh'
+endif
+
+let g:wiki_viewer = {
+    \ 'pdf': g:traap_pdf_viewer,
+    \   '_': 'xdg_open',
+    \}
+
+" -------------------------------------------------------------------------- }}}
 " {{{ Generic calendar setup.
 
 let g:calendar_mark = 'right'
@@ -13,7 +36,7 @@ let g:wiki_file_handler = 'WikiFileOpen'
 let g:wiki_filetypes = ['wiki', 'md']
 let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
-let g:wiki_viewer = {'pdf': 'okular'}
+let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
 let g:wiki_write_on_nav = 1
 
 " -------------------------------------------------------------------------- }}}
@@ -26,22 +49,6 @@ let g:wiki_export = {
     \ 'link_ext_replace': v:false,
     \ 'view' : v:false,
     \ 'output': 'printed',
-    \}
-
-" -------------------------------------------------------------------------- }}}
-" {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
-
-if g:os_wsl
-  let g:traap_pdf_viewer = 'SumatraPDF.exe'
-  let g:traap_png_viewer = 'feh'
-else
-  let g:traap_pdf_viewer = 'okular'
-  let g:traap_png_viewer = 'feh'
-endif
-
-let g:wiki_viewer = {
-    \ 'pdf': g:traap_pdf_viewer,
-    \   '_': 'xdg_open',
     \}
 
 " -------------------------------------------------------------------------- }}}
