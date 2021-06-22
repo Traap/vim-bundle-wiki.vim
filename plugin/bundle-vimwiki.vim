@@ -50,8 +50,17 @@ let g:wiki_write_on_nav = 1
 " -------------------------------------------------------------------------- }}}
 " {{{ Export current wiki page. 
 
+" Command line example
+" pandoc \
+"   --standalone \
+"   --template=default.latex \
+"   -f markdown \
+"   --metadata-file=wiki.yaml \
+"   -o pandoc/file.pdf file.wiki
+
+
 let g:wiki_export = {
-    \ 'args' : '',
+    \ 'args' : '--metadata-file=/home/traap/git/wiki/wiki.yaml',
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
     \ 'link_ext_replace': v:false,
