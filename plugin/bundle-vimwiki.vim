@@ -60,7 +60,7 @@ let g:wiki_write_on_nav = 1
 
 
 let g:wiki_export = {
-    \ 'args' : '--metadata-file=/home/traap/git/wiki/wiki.yaml',
+    \ 'args' : '--metadata-file=$HOME/git/wiki/wiki.yaml',
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
     \ 'link_ext_replace': v:false,
