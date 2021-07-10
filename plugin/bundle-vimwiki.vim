@@ -6,12 +6,12 @@ endif
 let g:loaded_bundle_vimwiki=1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Archlinux and Windows Subsystem for Linux check 
+" {{{ Archlinux and Windows Subsystem for Linux check
 
 let g:os_arch = trim(system("cat /etc/issue | rg 'Arch Linux' -c"))
 let g:os_wsl  = (substitute(system('uname -r'), '\n', '', '') =~ 'Microsoft') ||
-              \ (substitute(system('uname -r'), '\n', '', '') =~ 'WSL2') 
-             
+              \ (substitute(system('uname -r'), '\n', '', '') =~ 'WSL2')
+
 " -------------------------------------------------------------------------- }}}
 " {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
 
@@ -41,14 +41,14 @@ let g:calendar_diary_extension = '.wiki'
 " {{{ General settings.
 
 let g:wiki_file_handler = 'WikiFileOpen'
-let g:wiki_filetypes = ['wiki', 'md']
+let g:wiki_filetypes = ['md', 'wiki']
 let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
 let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
 let g:wiki_write_on_nav = 1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Export current wiki page. 
+" {{{ Export current wiki page.
 
 let g:wiki_export = {
     \ 'args' : '',
@@ -70,15 +70,19 @@ let g:wiki_templates = [
     \]
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Wiki Template  
+" {{{ Wiki Template
 
-
-let s:template = g:wiki_root . '/.template.md'
 " let s:journal = g:wiki_root . '/journal/.template.md'
 " let s:kjv = g:wiki_root . '/kjv/.template.md'
 " let s:posts = g:wiki_root . '/posts/.template.md'
 
+
+let s:journal = g:wiki_root . '/.journal.md'
+let s:template = g:wiki_root . '/.template.md'
+
 let g:wiki_templates = [
+    \ { 'match_re': '^\d\d\d\d-\d\d-\d\d$',
+    \   'source_filename': s:journal},
     \ { 'match_re': '*',
     \   'source_filename': s:template}
     \]
