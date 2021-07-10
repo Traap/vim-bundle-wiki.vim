@@ -59,6 +59,30 @@ let g:wiki_export = {
     \ 'output': 'printed',
     \}
 
+let s:template = g:wiki_root . '/.template.md'
+" let s:journal = g:wiki_root . '/journal/.template.md'
+" let s:kjv = g:wiki_root . '/kjv/.template.md'
+" let s:posts = g:wiki_root . '/posts/.template.md'
+
+let g:wiki_templates = [
+    \ { 'match_re': '*',
+    \   'source_filename': s:template}
+    \]
+
+" -------------------------------------------------------------------------- }}}
+" {{{ Wiki Template  
+
+
+let s:template = g:wiki_root . '/.template.md'
+" let s:journal = g:wiki_root . '/journal/.template.md'
+" let s:kjv = g:wiki_root . '/kjv/.template.md'
+" let s:posts = g:wiki_root . '/posts/.template.md'
+
+let g:wiki_templates = [
+    \ { 'match_re': '*',
+    \   'source_filename': s:template}
+    \]
+
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim File Handler
 
