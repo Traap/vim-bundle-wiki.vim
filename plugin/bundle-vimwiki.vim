@@ -81,32 +81,12 @@ let g:wiki_templates = [
 let s:journal = g:wiki_root . '/.journal.md'
 let s:template = g:wiki_root . '/.template.md'
 
-" let g:wiki_templates = [
-"     \ { 'match_re': '^\d\d\d\d-\d\d-\d\d$',
-"     \   'source_filename': s:journal},
-"     \ { 'match_re': {x -> v:true},
-"     \   'source_filename': s:template}
-"     \]
-
-" g:wiki_root:
-"   /home/traap/git/wiki
-
-" g:wiki_templates:
-"   {'match_re': '^\d\d\d\d-\d\d-\d\d$', 'source_filename': '/home/traap/git/wiki/.journal.md'}
-"   {'match_re': '*', 'source_filename': '/home/traap/git/wiki/.template.md'}
-
 let g:wiki_templates = [
-    \ { 'match_re': '^\d\d\d\d-\d\d-\d\d',
+    \ { 'match_re': '^\d\d\d\d-\d\d-\d\d$',
     \   'source_filename': s:journal},
-    \ { 'match_re': '.*',
+    \ { 'match_func': {x -> v:true},
     \   'source_filename': s:template}
     \]
-" g:wiki_root:
-"   /home/traap/git/wiki
-
-" g:wiki_templates:
-"   {'match_re': '^\d\d\d\d-\d\d-\d\d$', 'source_filename': '/home/traap/git/wiki/.journal.md'}
-"   {'match_re': '.*', 'source_filename': '/home/traap/git/wiki/.template.md'}
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim File Handler
