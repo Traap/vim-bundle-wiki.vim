@@ -73,19 +73,18 @@ let g:wiki_templates = [
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki Template
 
-" let s:journal = g:wiki_root . '/journal/.template.md'
-" let s:kjv = g:wiki_root . '/kjv/.template.md'
-" let s:posts = g:wiki_root . '/posts/.template.md'
-
-
-let s:journal = g:wiki_root . '/.journal.md'
+let s:journal = g:wiki_root . '/journal/.journal.md'
+let s:kjv = g:wiki_root . '/kjv/.kjv.md'
+let s:latex = g:wiki_root . '/latex/.latex.md'
+let s:posts = g:wiki_root . '/posts/.posts.md'
 let s:template = g:wiki_root . '/.template.md'
 
 let g:wiki_templates = [
-    \ { 'match_re': '^\d\d\d\d-\d\d-\d\d$',
-    \   'source_filename': s:journal},
-    \ { 'match_func': {x -> v:true},
-    \   'source_filename': s:template}
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:journal}, 
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:kjv},
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:latex},
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:posts},
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
     \]
 
 " -------------------------------------------------------------------------- }}}
