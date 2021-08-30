@@ -42,7 +42,7 @@ let g:calendar_diary_extension = '.wiki'
 " {{{ General settings.
 
 let g:wiki_file_handler = 'WikiFileOpen'
-let g:wiki_filetypes = ['md', 'wiki']
+let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx']
 let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
 let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
@@ -80,7 +80,7 @@ let s:posts = g:wiki_root . '/posts/.posts.md'
 let s:template = g:wiki_root . '/.template.md'
 
 let g:wiki_templates = [
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:journal}, 
+    \ { 'match_func': {x -> v:true}, 'source_filename': s:journal},
     \ { 'match_func': {x -> v:true}, 'source_filename': s:kjv},
     \ { 'match_func': {x -> v:true}, 'source_filename': s:latex},
     \ { 'match_func': {x -> v:true}, 'source_filename': s:posts},
