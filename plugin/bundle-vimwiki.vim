@@ -30,15 +30,6 @@ let g:wiki_viewer = {
     \}
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Generic calendar setup.
-
-let g:calendar_mark = 'right'
-let g:calendar_navi = 'both'
-let g:calendar_diary = $HOME.'/git/wiki/journal'
-let g:calendar_filetype = 'wiki'
-let g:calendar_diary_extension = '.wiki'
-
-" -------------------------------------------------------------------------- }}}
 " {{{ General settings.
 
 let g:wiki_file_handler = 'WikiFileOpen'
@@ -52,7 +43,7 @@ let g:wiki_write_on_nav = 1
 " {{{ Export current wiki page.
 
 let g:wiki_export = {
-    \ 'args' : '',
+    \ 'args' : '--metadata-file=$HOME/git/wiki/wiki.yaml',
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
     \ 'link_ext_replace': v:false,
@@ -61,8 +52,6 @@ let g:wiki_export = {
     \}
 
 let s:template = g:wiki_root . '/.template.md'
-" let s:journal = g:wiki_root . '/journal/.template.md'
-" let s:kjv = g:wiki_root . '/kjv/.template.md'
 " let s:posts = g:wiki_root . '/posts/.template.md'
 
 let g:wiki_templates = [
@@ -102,23 +91,6 @@ function! WikiFileOpen(...) abort dict
   endif
 
   return 0
-endfunction
-
-" -------------------------------------------------------------------------- }}}
-" {{{ Toggle calendar on the terminal right side.
-
-function! ToggleCalendar()
-  execute ":CalendarVR"
-  if exists("g:calendar_open")
-    if g:calendar_open == 1
-      execute "q"
-      unlet g:calendar_open
-    else
-      g:calendar_open = 1
-    end
-  else
-    let g:calendar_open = 1
-  end
 endfunction
 
 " -------------------------------------------------------------------------- }}}
