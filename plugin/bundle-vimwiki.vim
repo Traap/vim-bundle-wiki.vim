@@ -94,3 +94,26 @@ function! WikiFileOpen(...) abort dict
 endfunction
 
 " -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim Page Creator
+
+let g:wiki_map_create_page = 'WikiPageCreator'
+
+function WikiPageCreator(name) abort
+  let l:name = wiki#get_root() . '/' . a:name
+
+  " If the file is new, then append the current date
+  return filereadable(l:name)
+        \ ? a:name
+        \ : a:name . '_' . strftime('%Y%m%d')
+endfunction
+
+" -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim Link Creator
+
+let g:wiki_map_link_create = 'WikiLinkCreator'
+
+function WikiLinkCreator(text) abort
+  return substitute(tolower(a:text), '\s\+', '-', 'g')
+endfunction
+
+" -------------------------------------------------------------------------- }}}
