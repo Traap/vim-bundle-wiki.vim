@@ -30,17 +30,20 @@ let g:wiki_viewer = {
     \}
 
 " -------------------------------------------------------------------------- }}}
-" {{{ General settings.
+" {{{ Wiki.vim general settings.
 
-let g:wiki_file_handler = 'WikiFileOpen'
+" General settings are listed alphabetically only because I find them faster.
+
 let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx']
+let g:wiki_link_extension = '.md'
+let g:wiki_link_target_type= 'md'
 let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
 let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
 let g:wiki_write_on_nav = 1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Export current wiki page.
+" {{{ Wiki.vim export current page.
 
 let g:wiki_export = {
     \ 'args' : '--metadata-file=$HOME/git/wiki/wiki.yaml',
@@ -51,33 +54,27 @@ let g:wiki_export = {
     \ 'output': 'printed',
     \}
 
-let s:template = g:wiki_root . '/.template.md'
-" let s:posts = g:wiki_root . '/posts/.template.md'
-
-let g:wiki_templates = [
-    \ { 'match_re': '*',
-    \   'source_filename': s:template}
-    \]
-
 " -------------------------------------------------------------------------- }}}
-" {{{ Wiki Template
+" {{{ Wiki.vim Page Templates
 
 let s:journal = g:wiki_root . '/journal/.journal.md'
 let s:kjv = g:wiki_root . '/kjv/.kjv.md'
 let s:latex = g:wiki_root . '/latex/.latex.md'
 let s:posts = g:wiki_root . '/posts/.posts.md'
-let s:template = g:wiki_root . '/.template.md'
+" let s:template = g:wiki_root . '/.template.md'
 
-let g:wiki_templates = [
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:journal},
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:kjv},
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:latex},
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:posts},
-    \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
-    \]
+" let g:wiki_templates = [
+"     \ { 'match_func': {x -> v:true}, 'source_filename': s:journal},
+"     \ { 'match_func': {x -> v:true}, 'source_filename': s:kjv},
+"     \ { 'match_func': {x -> v:true}, 'source_filename': s:latex},
+"     \ { 'match_func': {x -> v:true}, 'source_filename': s:posts},
+"     \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
+"     \]
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim File Handler
+
+let g:wiki_file_handler = 'WikiFileOpen'
 
 function! WikiFileOpen(...) abort dict
   if self.path =~# 'pdf$'
@@ -101,17 +98,16 @@ let g:wiki_map_create_page = 'WikiPageCreator'
 function WikiPageCreator(name) abort
   let l:name = wiki#get_root() . '/' . a:name
 
-  " If the file is new, then append the current date
   return filereadable(l:name)
-        \ ? a:name
-        \ : a:name . '_' . strftime('%Y%m%d')
+        \ ? l:name
+        \ : l:name . '-' . strftime('%Y%m%d-%H%M%S')
+
 endfunction
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Link Creator
 
 let g:wiki_map_link_create = 'WikiLinkCreator'
-
 function WikiLinkCreator(text) abort
   return substitute(tolower(a:text), '\s\+', '-', 'g')
 endfunction
