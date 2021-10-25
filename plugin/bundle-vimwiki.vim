@@ -36,7 +36,7 @@ let g:wiki_viewer = {
 
 let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx']
 let g:wiki_link_extension = '.md'
-let g:wiki_link_target_type= 'md'
+let g:wiki_link_target_type = 'md'
 let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
 let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
