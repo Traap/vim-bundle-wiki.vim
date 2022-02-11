@@ -30,7 +30,7 @@ let g:wiki_viewer = {
     \}
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Wiki.vim general settings.
+" {{{ Wiki.vim General settings.
 
 " General settings are listed alphabetically only because I find them faster.
 
@@ -43,7 +43,7 @@ let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
 let g:wiki_write_on_nav = 1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Wiki.vim export current page.
+" {{{ Wiki.vim Export current page.
 
 let g:wiki_export = {
     \ 'args' : '--metadata-file=$HOME/git/wiki/wiki.yaml',
@@ -53,23 +53,6 @@ let g:wiki_export = {
     \ 'view' : v:true,
     \ 'output': 'printed',
     \}
-
-" -------------------------------------------------------------------------- }}}
-" {{{ Wiki.vim Page Templates
-
-let s:journal = g:wiki_root . '/journal/.journal.md'
-let s:kjv = g:wiki_root . '/kjv/.kjv.md'
-let s:latex = g:wiki_root . '/latex/.latex.md'
-let s:posts = g:wiki_root . '/posts/.posts.md'
-" let s:template = g:wiki_root . '/.template.md'
-
-" let g:wiki_templates = [
-"     \ { 'match_func': {x -> v:true}, 'source_filename': s:journal},
-"     \ { 'match_func': {x -> v:true}, 'source_filename': s:kjv},
-"     \ { 'match_func': {x -> v:true}, 'source_filename': s:latex},
-"     \ { 'match_func': {x -> v:true}, 'source_filename': s:posts},
-"     \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
-"     \]
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim File Handler
@@ -91,6 +74,31 @@ function! WikiFileOpen(...) abort dict
 endfunction
 
 " -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim Journal
+
+let s:journal = g:wiki_root . '/journal'
+
+let g:wiki_journal = {
+    \  'name': s:journal,
+    \  'frequency': 'daily',
+    \  'date_format': {
+    \    'daily' : '%Y-%m-%d',
+    \    'weekly' : '%Y_w%V',
+    \    'monthly' : '%Y_m%m',
+    \  },
+    \ 'index_use_journal_scheme': v:true,
+    \}
+
+" -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim Link Creator
+
+let g:wiki_map_link_create = 'WikiLinkCreator'
+
+function WikiLinkCreator(text) abort
+  return substitute(tolower(a:text), '\s\+', '-', 'g')
+endfunction
+
+" -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Page Creator
 
 let g:wiki_map_create_page = 'WikiPageCreator'
@@ -105,11 +113,21 @@ function WikiPageCreator(name) abort
 endfunction
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Wiki.vim Link Creator
+" {{{ Wiki.vim Page Templates
 
-let g:wiki_map_link_create = 'WikiLinkCreator'
-function WikiLinkCreator(text) abort
-  return substitute(tolower(a:text), '\s\+', '-', 'g')
+let s:template = g:wiki_root . '/.template.md'
+
+let g:wiki_templates = [
+     \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
+     \]
+
+" A-title-page-name becomes A Title Page Name.
+"
+" https://stackoverflow.com/questions/17440659/capitalize-first-letter-of-each-word-in-a-selection-using-vim#
+"
+function! PageNameTitleCase(ctx, text) abort
+  let s:temp = substitute(a:text, '-', ' ', 'g')
+  return substitute(s:temp, '\v<(.)(\w*)', '\u\1\L\2', 'g')
 endfunction
 
 " -------------------------------------------------------------------------- }}}
