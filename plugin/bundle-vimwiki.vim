@@ -76,7 +76,7 @@ endfunction
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Journal
 
-let s:journal = g:wiki_root . '/journal'
+let s:journal = 'journal'
 
 let g:wiki_journal = {
     \  'name': s:journal,
