@@ -34,7 +34,7 @@ let g:wiki_viewer = {
 
 " General settings are listed alphabetically only because I find them faster.
 
-let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx']
+let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx', 'csv']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
 let g:wiki_root  = $HOME.'/git/wiki'
