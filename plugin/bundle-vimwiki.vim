@@ -6,17 +6,9 @@ endif
 let g:loaded_bundle_vimwiki=1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Archlinux and Windows Subsystem for Linux check
-
-let g:os_arch = trim(system("cat /etc/issue | rg 'Arch Linux' -c"))
-
-let s:os_wsl = trim(system('uname -r'))
-let g:os_wsl  = (s:os_wsl =~ 'Microsoft') || (s:os_wsl =~ 'WSL2')
-
-" -------------------------------------------------------------------------- }}}
 " {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
 
-if g:os_wsl
+if has("wsl") || has("win32unix")
   let g:traap_pdf_viewer = 'SumatraPDF.exe'
   let g:traap_png_viewer = 'feh'
 else
