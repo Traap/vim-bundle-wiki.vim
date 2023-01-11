@@ -1,2 +1,2 @@
-# vim-bundle-vimwiki
-My personal vimwiki settings.
+# vim-bundle-wiki.vim
+My personal wiki settings.
