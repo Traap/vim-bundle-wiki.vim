@@ -1,9 +1,9 @@
 " {{{ bundle-vimwiki.vim
 
-if exists('g:loaded_bundle_vimwiki')
+if exists('g:loaded_bundle_wiki_vim')
   finish
 endif
-let g:loaded_bundle_vimwiki=1
+let g:loaded_bundle_wiki_vim=1
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
@@ -22,6 +22,16 @@ let g:wiki_viewer = {
     \}
 
 " -------------------------------------------------------------------------- }}}
+" {{{ Wiki.vim root
+
+function! WikiRoot()
+  let l:local = finddir('wiki', ';./')
+  return !empty(l:local) ? l:local : expand($WIKIHOME)
+endfunction
+
+let g:wiki_root  = 'WikiRoot'
+
+" -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim General settings.
 
 " General settings are listed alphabetically only because I find them faster.
@@ -29,7 +39,6 @@ let g:wiki_viewer = {
 let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx', 'csv']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
-let g:wiki_root  = $HOME.'/git/wiki'
 let g:wiki_toc_depth = 2
 let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
 let g:wiki_write_on_nav = 1
@@ -38,7 +47,7 @@ let g:wiki_write_on_nav = 1
 " {{{ Wiki.vim Export current page.
 
 let g:wiki_export = {
-    \ 'args' : '--metadata-file=$HOME/git/wiki/wiki.yaml',
+    \ 'args' : '--metadata-file=$WIKIHOME/wiki.yaml',
     \ 'from_format' : 'markdown',
     \ 'ext' : 'pdf',
     \ 'link_ext_replace': v:false,
