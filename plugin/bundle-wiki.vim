@@ -116,7 +116,7 @@ endfunction
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Page Templates
 
-let s:template = wiki#get_root() . '/.template.md'
+let s:template = expand($WIKIHOME) . '/.template.md'
 
 let g:wiki_templates = [
      \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
