@@ -1,4 +1,4 @@
-" {{{ bundle-vimwiki.vim
+" {{{ bundle-vimwiki.vio
 
 if exists('g:loaded_bundle_wiki_vim')
   finish
@@ -116,7 +116,7 @@ endfunction
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Page Templates
 
-let s:template = g:wiki_root . '/.template.md'
+let s:template = wiki#get_root() . '/.template.md'
 
 let g:wiki_templates = [
      \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
