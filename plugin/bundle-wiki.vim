@@ -8,7 +8,7 @@ let g:loaded_bundle_wiki_vim=1
 " -------------------------------------------------------------------------- }}}
 " {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
 
-if has("wsl") || has("win32unix")
+if !empty(getenv('WSL_DISTRO_NAME')) || has("win32unix")
   let g:traap_pdf_viewer = 'SumatraPDF.exe'
   let g:traap_png_viewer = 'feh'
 else
