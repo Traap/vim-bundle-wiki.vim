@@ -87,6 +87,7 @@ let g:wiki_journal = {
     \    'weekly' : '%Y_w%V',
     \    'monthly' : '%Y_m%m',
     \  },
+    \ 'root': '',
     \ 'index_use_journal_scheme': v:true,
     \}
 
