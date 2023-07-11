@@ -1,4 +1,4 @@
-" {{{ bundle-vimwiki.vio
+" {{{ bundle-wiki.vim
 
 if exists('g:loaded_bundle_wiki_vim')
   finish
@@ -8,18 +8,13 @@ let g:loaded_bundle_wiki_vim=1
 " -------------------------------------------------------------------------- }}}
 " {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
 
-if !empty(getenv('WSL_DISTRO_NAME')) || has("win32unix")
+if !empty(getenv('WSL_DISTRO_NAME'))
   let g:traap_pdf_viewer = 'SumatraPDF.exe'
   let g:traap_png_viewer = 'feh'
 else
   let g:traap_pdf_viewer = 'okular'
   let g:traap_png_viewer = 'feh'
 endif
-
-let g:wiki_viewer = {
-    \ 'pdf': g:traap_pdf_viewer,
-    \   '_': 'xdg_open',
-    \}
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim root
@@ -40,7 +35,11 @@ let g:wiki_filetypes = ['md', 'wiki', 'puml', 'tex', 'texx', 'csv']
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
 let g:wiki_toc_depth = 2
-let g:wiki_viewer = {'pdf': g:traap_pdf_viewer}
+let g:wiki_viewer = {
+    \ 'pdf': g:traap_pdf_viewer,
+    \   '_': 'xdg_open',
+    \}
+
 let g:wiki_write_on_nav = 1
 
 " -------------------------------------------------------------------------- }}}
@@ -53,6 +52,7 @@ let g:wiki_export = {
     \ 'link_ext_replace': v:false,
     \ 'view' : v:true,
     \ 'output': 'printed',
+    \ 'viewer': g:traap_pdf_viewer,
     \}
 
 " -------------------------------------------------------------------------- }}}
