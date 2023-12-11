@@ -95,25 +95,33 @@ let g:wiki_journal = {
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Link Creator
 
-let g:wiki_map_link_create = 'WikiLinkCreator'
+let g:wiki_link_creation = {
+      \ 'md': {
+      \   'link_type': 'md',
+      \   'url_extension': '.md',
+      \   'url_transform': { x ->
+      \     substitute(tolower(x), '\s\+', '-', 'g') },
+      \ },
+      \ 'org': {
+      \   'link_type': 'org',
+      \   'url_extension': '.org',
+      \   'url_transform': { x ->
+      \     substitute(tolower(x), '\s\+', '-', 'g') },
+      \ },
+      \ 'adoc': {
+      \   'link_type': 'adoc_xref_bracket',
+      \   'url_extension': '',
+      \   'url_transform': { x ->
+      \     substitute(tolower(x), '\s\+', '-', 'g') },
+      \ },
+      \ '_': {
+      \   'link_type': 'wiki',
+      \   'url_extension': '',
+      \   'url_transform': { x ->
+      \     substitute(tolower(x), '\s\+', '-', 'g') },
+      \ },
+      \}
 
-function WikiLinkCreator(text) abort
-  return substitute(tolower(a:text), '\s\+', '-', 'g')
-endfunction
-
-" -------------------------------------------------------------------------- }}}
-" {{{ Wiki.vim Page Creator
-
-let g:wiki_map_create_page = 'WikiPageCreator'
-
-function WikiPageCreator(name) abort
-  let l:name = wiki#get_root() . '/' . a:name
-
-  return filereadable(l:name)
-        \ ? l:name
-        \ : l:name . '-' . strftime('%Y%m%d-%H%M%S')
-
-endfunction
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim Page Templates
@@ -121,7 +129,7 @@ endfunction
 let s:template = expand($WIKIHOME) . '/.template.md'
 
 let g:wiki_templates = [
-     \ { 'match_func': {x -> v:true}, 'source_filename': s:template}
+     \ { 'match_func': {x -> v:true}, 'source_filename': s:template},
      \]
 
 " A-title-page-name becomes A Title Page Name.
