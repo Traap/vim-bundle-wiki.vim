@@ -31,7 +31,23 @@ let g:wiki_root  = 'WikiRoot'
 
 " General settings are listed alphabetically only because I find them faster.
 
-let g:wiki_filetypes = ['md','csv','json','puml','sql','tex','texx','wiki','xml','yaml']
+let g:wiki_filetypes = [
+    \  'md'
+    \ ,'cpp'
+    \ ,'csv'
+    \ ,'go'
+    \ ,'js'
+    \ ,'json'
+    \ ,'puml'
+    \ ,'rs'
+    \ ,'sql'
+    \ ,'tex'
+    \ ,'texx'
+    \ ,'ts'
+    \ ,'wiki'
+    \ ,'xml'
+    \ ,'yaml'
+    \ ]
 
 let g:wiki_link_extension = '.md'
 let g:wiki_link_target_type = 'md'
