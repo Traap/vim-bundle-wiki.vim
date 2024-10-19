@@ -6,14 +6,20 @@ endif
 let g:loaded_bundle_wiki_vim=1
 
 " -------------------------------------------------------------------------- }}}
-" {{{ Settings based on Windoz Subsystem for Linux (WSL2) check.
+" {{{ Use environment variable PDF_VIEWER and PNG_VIEWER regardless of OS.
 
-if !empty(getenv('WSL_DISTRO_NAME'))
-  let g:traap_pdf_viewer = 'SumatraPDF.exe'
-  let g:traap_png_viewer = 'feh'
+let s:pdf_viewer = getenv('PDF_VIEWER')
+if s:pdf_viewer != v:null && !empty(s:pdf_viewer)
+  let g:traap_pdf_viewer = s:pdf_viewer
 else
-  let g:traap_pdf_viewer = 'okular'
-  let g:traap_png_viewer = 'feh'
+  echo "Warning: PDF_VIEWER is not defined."
+endif
+
+let s:png_viewer = getenv('PNG_VIEWER')
+if s:png_viewer != v:null && !empty(s:png_viewer)
+  let g:traap_png_viewer = s:png_viewer
+else
+  echo "Warning: PNG_VIEWER is not defined."
 endif
 
 " -------------------------------------------------------------------------- }}}
