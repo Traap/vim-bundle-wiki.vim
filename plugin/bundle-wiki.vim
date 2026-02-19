@@ -26,11 +26,29 @@ endif
 " {{{ Wiki.vim root
 
 function! WikiRoot()
-  let l:local = finddir('wiki', ';./')
-  return !empty(l:local) ? l:local : expand($WIKIHOME)
+  " Start at current directory and walk upward.
+  let l:dir = getcwd()
+
+  while 1
+    " Look for a directory in this level whose name matches ^wiki$ case-insensitively.
+    for l:name in readdir(l:dir)
+      if l:name =~? '^wiki$' && isdirectory(l:dir . '/' . l:name)
+        return l:dir . '/' . l:name
+      endif
+    endfor
+
+    " Stop when we hit filesystem root.
+    let l:parent = fnamemodify(l:dir, ':h')
+    if l:parent ==# l:dir
+      break
+    endif
+    let l:dir = l:parent
+  endwhile
+
+  return expand('$WIKIHOME')
 endfunction
 
-let g:wiki_root  = 'WikiRoot'
+let g:wiki_root = WikiRoot()
 
 " -------------------------------------------------------------------------- }}}
 " {{{ Wiki.vim General settings.
@@ -110,7 +128,7 @@ let g:wiki_journal = {
     \    'weekly' : '%Y_w%V',
     \    'monthly' : '%Y_m%m',
     \  },
-    \ 'root': '',
+    \ 'root': g:wiki_root,
     \ 'index_use_journal_scheme': v:true,
     \}
 
