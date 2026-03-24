@@ -12,14 +12,14 @@ let s:pdf_viewer = getenv('PDF_VIEWER')
 if s:pdf_viewer != v:null && !empty(s:pdf_viewer)
   let g:traap_pdf_viewer = s:pdf_viewer
 else
-  echo "Warning: PDF_VIEWER is not defined."
+  echo "Warning: !!!!! PDF_VIEWER is not defined."
 endif
 
 let s:png_viewer = getenv('PNG_VIEWER')
 if s:png_viewer != v:null && !empty(s:png_viewer)
   let g:traap_png_viewer = s:png_viewer
 else
-  echo "Warning: PNG_VIEWER is not defined."
+  echo "Warning: (wiki) PNG_VIEWER is not defined."
 endif
 
 " -------------------------------------------------------------------------- }}}
